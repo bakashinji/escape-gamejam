@@ -1,0 +1,7 @@
+Create a folder ../build
+cd ../build
+ccmake ../$ESCAPE_ROOT_FOLDER
+press c
+ignore that boost lib dir couldn't be found, doesn't matter ^^
+cd CMakeFiles/poc.dir/
+open link.txt with an editor of your choise and add -lboost_system
