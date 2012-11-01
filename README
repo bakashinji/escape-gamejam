@@ -5,3 +5,9 @@ press c
 ignore that boost lib dir couldn't be found, doesn't matter ^^
 cd CMakeFiles/poc.dir/
 open link.txt with an editor of your choise and add -lboost_system
+
+to install ogrebullet with archlinux do the following:
+copy the PKGBUILD file as well as the bugfix.diff in a seperate folder
+run makepkg
+run pacman -U <packagename>.tar.xz
+you can now delete the whole stuff in this dir

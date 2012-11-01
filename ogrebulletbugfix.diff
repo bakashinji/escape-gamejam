@@ -1,0 +1,56 @@
+Index: Collisions/src/OgreBulletCollisionsRay.cpp
+===================================================================
+--- Collisions/src/OgreBulletCollisionsRay.cpp	(revision 2986)
++++ Collisions/src/OgreBulletCollisionsRay.cpp	(working copy)
+@@ -84,7 +84,7 @@
+     // -------------------------------------------------------------------------
+     Object  *CollisionClosestRayResultCallback::getCollidedObject () const
+     {        
+-        return mWorld->findObject(static_cast<btCollisionWorld::ClosestRayResultCallback *> (mRayResultCallback)->m_collisionObject);
++        return mWorld->findObject(const_cast<btCollisionObject*>(static_cast<btCollisionWorld::ClosestRayResultCallback *> (mRayResultCallback)->m_collisionObject));
+ 	}
+     // -------------------------------------------------------------------------
+ 	CollisionClosestRayResultCallback::CollisionClosestRayResultCallback(const Ogre::Ray &ray, CollisionsWorld *world, Ogre::Real max_distance) :
+Index: Collisions/src/OgreBulletCollisionsWorld.cpp
+===================================================================
+--- Collisions/src/OgreBulletCollisionsWorld.cpp	(revision 2986)
++++ Collisions/src/OgreBulletCollisionsWorld.cpp	(working copy)
+@@ -223,8 +223,8 @@
+ 	{
+ 		btPersistentManifold* contactManifold = mWorld->getDispatcher()->getManifoldByIndexInternal(i);
+ 
+-		btCollisionObject* obA = static_cast<btCollisionObject*>(contactManifold->getBody0());
+-		btCollisionObject* obB = static_cast<btCollisionObject*>(contactManifold->getBody1());
++		btCollisionObject* obA = const_cast<btCollisionObject*>(contactManifold->getBody0());
++		btCollisionObject* obB = const_cast<btCollisionObject*>(contactManifold->getBody1());
+ 
+ 		contactManifold->refreshContactPoints(obA->getWorldTransform(),obB->getWorldTransform());
+ 
+Index: Collisions/src/Utils/OgreBulletCollisionsMeshToShapeConverter.cpp
+===================================================================
+--- Collisions/src/Utils/OgreBulletCollisionsMeshToShapeConverter.cpp	(revision 2986)
++++ Collisions/src/Utils/OgreBulletCollisionsMeshToShapeConverter.cpp	(working copy)
+@@ -32,7 +32,7 @@
+ 
+ #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+ 
+-#include "ConvexBuilder.h"
++#include "ConvexDecomposition/ConvexBuilder.h"
+ 
+ #include "BulletCollision/CollisionShapes/btShapeHull.h"
+ 
+Index: Dynamics/src/OgreBulletDynamicsWorld.cpp
+===================================================================
+--- Dynamics/src/OgreBulletDynamicsWorld.cpp	(revision 2986)
++++ Dynamics/src/OgreBulletDynamicsWorld.cpp	(working copy)
+@@ -108,8 +108,8 @@
+ 			{
+ 				btPersistentManifold* contactManifold = mWorld->getDispatcher()->getManifoldByIndexInternal(i);
+ 
+-				btCollisionObject* obA = static_cast<btCollisionObject*>(contactManifold->getBody0());
+-				btCollisionObject* obB = static_cast<btCollisionObject*>(contactManifold->getBody1());
++				btCollisionObject* obA = const_cast<btCollisionObject*>(contactManifold->getBody0());
++				btCollisionObject* obB = const_cast<btCollisionObject*>(contactManifold->getBody1());
+ 
+ 				contactManifold->refreshContactPoints(obA->getWorldTransform(),obB->getWorldTransform());
+ 
