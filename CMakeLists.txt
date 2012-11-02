@@ -194,10 +194,10 @@ set(CMAKE_MODULE_PATH
 	${CMAKE_SOURCE_DIR}/cmake
 )
 
-find_package(OGREBULLET REQUIRED)
-if(NOT OGREBULLET_FOUND)
-	message(SEND_ERROR "Failed to find ogrebullet!")
-endif()
+#find_package(OGREBULLET REQUIRED)
+#if(NOT OGREBULLET_FOUND)
+#	message(SEND_ERROR "Failed to find ogrebullet!")
+#endif()
 
 #set(Boost_USE_STATIC_LIBS       ON)
 #set(Boost_USE_STATIC_RUNTIME    OFF)
