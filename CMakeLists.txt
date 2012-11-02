@@ -51,7 +51,9 @@ find_package(OIS REQUIRED)
 if(NOT OIS_FOUND)
 	message(SEND_ERROR "Failed to find OIS.")
 endif()
- 
+
+
+
 # Find Boost
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	if (WIN32 OR APPLE)
@@ -178,6 +180,11 @@ set(CMAKE_MODULE_PATH
 	/usr/lib/OGRE/cmake
 	${CMAKE_SOURCE_DIR}/cmake
 )
+
+find_package(OGREBULLET REQUIRED)
+if(NOT OGREBULLET_FOUND)
+	message(SEND_ERROR "Failed to find ogrebullet!")
+endif()
 
 #set(Boost_USE_STATIC_LIBS       ON)
 #set(Boost_USE_STATIC_RUNTIME    OFF)
