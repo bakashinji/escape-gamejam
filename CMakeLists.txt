@@ -176,7 +176,6 @@ set(SRC
 	${SRC_DIR}/GameObject.cpp
 )
 set(HDR
-	${SRC_DIR}/unique_ptr.h
 	${SRC_DIR}/GameApplication.h
 	${SRC_DIR}/Escape.h
 	${SRC_DIR}/GameState.h
@@ -198,8 +197,7 @@ set(HDR
 )
 
 # audaspace source
-#list(APPEND SRC
-set(USELESS_SRC
+list(APPEND SRC
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.cpp
 	${SRC_DIR}/audaspace/AUD_Buffer.cpp
 	${SRC_DIR}/audaspace/AUD_BufferReader.cpp
@@ -271,8 +269,7 @@ set(USELESS_SRC
 )
 
 # audaspace header
-#list(APPEND HDR
-set(USELESS_HDR
+list(APPEND HDR
 	${SRC_DIR}/audaspace/AUD_3DMath.h
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.h
 	${SRC_DIR}/audaspace/AUD_Buffer.h

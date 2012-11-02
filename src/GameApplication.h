@@ -16,9 +16,10 @@ class GameApplication
 	protected:
 		std::map<std::string, GameState*> m_game_states;
 		std::stack<GameState*> m_states_stack;
-		unique_ptr(IConfiguration) m_config;
+		IConfiguration* m_config;
 
 	public:
+		GameApplication();
 		virtual ~GameApplication();
 
 		IConfiguration& getConfig();

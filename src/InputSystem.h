@@ -21,8 +21,8 @@ class IConfiguration;
 class InputSystem : public GameSystem
 {
 private:
-	unique_ptr(SDLMouse) m_mouse;
-	unique_ptr(SDLKeyboard) m_keyboard;
+	SDLMouse* m_mouse;
+	SDLKeyboard* m_keyboard;
 	std::map<int, boost::shared_ptr<SDLJoystick> > m_joysticks;
 
 public:

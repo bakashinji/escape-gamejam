@@ -4,6 +4,11 @@
 #include "GameState.h"
 #include "MessageException.h"
 
+GameApplication::GameApplication() :
+	m_config(NULL)
+{
+}
+
 GameApplication::~ GameApplication()
 {
 	if(!m_states_stack.empty())
@@ -24,6 +29,8 @@ GameApplication::~ GameApplication()
 		delete begin->second;
 		m_game_states.erase(begin);
 	}
+
+	delete m_config;
 }
 
 IConfiguration& GameApplication::getConfig()

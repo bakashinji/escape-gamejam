@@ -8,7 +8,9 @@
 #include <boost/foreach.hpp>
 
 InputSystem::InputSystem(GameApplication& ga) :
-	GameSystem(ga)
+	GameSystem(ga),
+	m_mouse(NULL),
+	m_keyboard(NULL)
 {
 	SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	SDL_JoystickEventState(SDL_ENABLE);
@@ -20,12 +22,14 @@ InputSystem::InputSystem(GameApplication& ga) :
 	config.getInteger("width", width);
 	config.getInteger("height", height);
 
-	m_mouse.reset(new SDLMouse(width, height));
-	m_keyboard.reset(new SDLKeyboard());
+	m_mouse = new SDLMouse(width, height);
+	m_keyboard = new SDLKeyboard();
 }
 
 InputSystem::~InputSystem()
 {
+	delete m_mouse;
+	delete m_keyboard;
 }
 
 void InputSystem::bind(IConfiguration& config, std::vector<boost::shared_ptr<IInputAction> >& actions)
@@ -40,9 +44,9 @@ void InputSystem::bind(IConfiguration& config, std::vector<boost::shared_ptr<IIn
 	BOOST_FOREACH(std::string& device, devices)
 	{
 		if(device == "keyboard")
-			dev = m_keyboard.get();
+			dev = m_keyboard;
 		else if(device == "mouse")
-			dev = m_mouse.get();
+			dev = m_mouse;
 		else
 		{
 			int id = SDLJoystick::nameToID(device, "joystick");
