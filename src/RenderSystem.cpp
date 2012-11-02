@@ -29,14 +29,14 @@ RenderSystem::RenderSystem(GameApplication &ga) :
 	// SDL Setup
 
 	if(SDL_InitSubSystem(SDL_INIT_VIDEO))
-		throw MessageException("Error initializing SDL: " + std::string(SDL_GetError()), ERROR);
+		throw MessageException("Error initializing SDL: " + std::string(SDL_GetError()), MET_ERROR);
 
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 	if(!(m_screen = SDL_SetVideoMode(width, height, bbp, SDL_OPENGL | SDL_DOUBLEBUF | (windowed ? 0 : SDL_FULLSCREEN))))
 	{
 		SDL_Quit();
-		throw MessageException("Error setting videomode: " + std::string(SDL_GetError()), ERROR);
+		throw MessageException("Error setting videomode: " + std::string(SDL_GetError()), MET_ERROR);
 	}
 
 	// OGRE Setup

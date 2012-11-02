@@ -89,7 +89,7 @@ void GameApplication::pushGameState(std::string name)
 	}
 	else
 	{
-		throw MessageException("Game state " + name + " not found!", ERROR);
+		throw MessageException("Game state " + name + " not found!", MET_ERROR);
 	}
 }
 

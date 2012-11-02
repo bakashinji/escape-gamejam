@@ -7,7 +7,7 @@ SDLJoystick::SDLJoystick(int id)
 {
 	m_joystick = SDL_JoystickOpen(id);
 	if(!m_joystick)
-		throw MessageException(SDL_GetError(), WARNING);
+		throw MessageException(SDL_GetError(), MET_WARNING);
 }
 
 SDLJoystick::~SDLJoystick()
