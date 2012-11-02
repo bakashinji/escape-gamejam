@@ -5,9 +5,9 @@
 
 enum MessageExceptionType
 {
-	INFO,
-	WARNING,
-	ERROR
+	MET_INFO,
+	MET_WARNING,
+	MET_ERROR
 };
 
 class MessageException : public std::exception
