@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 2.6)
 
 project(Escape)
+
+set(SRC_DIR src)
+
+set(INC_DIRS
+	${SRC_DIR}
+	${SRC_DIR}/audaspace
+	${SRC_DIR}/audaspace/FX
+	${SRC_DIR}/audaspace/OpenAL
+	${SRC_DIR}/audaspace/OpenAL
+)
+
 if(WIN32)
 	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
 	set(OGRE_SAMPLES_INCLUDEPATH
@@ -80,7 +91,9 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	find_package(Boost QUIET)
  
 	# Set up referencing of Boost
-	include_directories(${Boost_INCLUDE_DIR})
+	list(APPEND INC_DIRS
+		${Boost_INCLUDE_DIR}
+	)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
@@ -196,63 +209,223 @@ find_package(Lua51 REQUIRED)
 
 set(CMAKE_CXX_FLAGS "-std=c++0x")
 
-include_directories(
+list(APPEND INC_DIRS
 	${OpenGL_INCLUDE_DIR}
 	${OGRE_INCLUDE_DIRS}
 	${SDL_INCLUDE_DIR}
 	${OPENAL_INCLUDE_DIR}
 	${SndFile_INCLUDE_DIRS}
 	${LUA_INCLUDE_DIR}
-#	audaspace
 )
+
+include_directories(${INC_DIRS})
 
 link_directories(
 	${OGRE_LIBRARY_DIRS}
 )
 
-set(EXE poc)
+set(EXE escape)
 set(SRC
-	src/main.cpp
-	src/GameApplication.cpp
-	src/WingsOfConcept.cpp
-	src/GameState.cpp
-	src/MainState.cpp
-	src/GameSystem.cpp
-	src/RenderSystem.cpp
-	src/InputSystem.cpp
-	src/MessageException.cpp
-	src/LuaConfiguration.cpp
-	src/InputDevice.cpp
-	src/SDLKeyboard.cpp
-	src/SDLMouse.cpp
-	src/SDLJoystick.cpp
-	src/QuitAction.cpp
-	src/MoveActions.cpp
-	src/CombatActions.cpp
-	src/GameObject.cpp
-	src/Fighter.cpp
+	${SRC_DIR}/main.cpp
+	${SRC_DIR}/GameApplication.cpp
+	${SRC_DIR}/WingsOfConcept.cpp
+	${SRC_DIR}/GameState.cpp
+	${SRC_DIR}/MainState.cpp
+	${SRC_DIR}/GameSystem.cpp
+	${SRC_DIR}/RenderSystem.cpp
+	${SRC_DIR}/InputSystem.cpp
+	${SRC_DIR}/MessageException.cpp
+	${SRC_DIR}/LuaConfiguration.cpp
+	${SRC_DIR}/InputDevice.cpp
+	${SRC_DIR}/SDLKeyboard.cpp
+	${SRC_DIR}/SDLMouse.cpp
+	${SRC_DIR}/SDLJoystick.cpp
+	${SRC_DIR}/QuitAction.cpp
+	${SRC_DIR}/MoveActions.cpp
+	${SRC_DIR}/CombatActions.cpp
+	${SRC_DIR}/GameObject.cpp
+	${SRC_DIR}/Fighter.cpp
 )
 set(HDR
-	src/GameApplication.h
-	src/WingsOfConcept.h
-	src/GameState.h
-	src/MainState.h
-	src/GameSystem.h
-	src/RenderSystem.h
-	src/InputSystem.h
-	src/MessageException.h
-	src/IConfiguration.h
-	src/LuaConfiguration.h
-	src/IInputAction.h
-	src/InputDevice.h
-	src/SDLKeyboard.h
-	src/SDLMouse.h
-	src/SDLJoystick.h
-	src/QuitAction.h
-	src/MoveActions.h
-	src/CombatActions.h
-	src/GameObject.h
-	src/Fighter.h
+	${SRC_DIR}/GameApplication.h
+	${SRC_DIR}/WingsOfConcept.h
+	${SRC_DIR}/GameState.h
+	${SRC_DIR}/MainState.h
+	${SRC_DIR}/GameSystem.h
+	${SRC_DIR}/RenderSystem.h
+	${SRC_DIR}/InputSystem.h
+	${SRC_DIR}/MessageException.h
+	${SRC_DIR}/IConfiguration.h
+	${SRC_DIR}/LuaConfiguration.h
+	${SRC_DIR}/IInputAction.h
+	${SRC_DIR}/InputDevice.h
+	${SRC_DIR}/SDLKeyboard.h
+	${SRC_DIR}/SDLMouse.h
+	${SRC_DIR}/SDLJoystick.h
+	${SRC_DIR}/QuitAction.h
+	${SRC_DIR}/MoveActions.h
+	${SRC_DIR}/CombatActions.h
+	${SRC_DIR}/GameObject.h
+	${SRC_DIR}/Fighter.h
+)
+
+# audaspace source
+list(APPEND SRC
+	${SRC_DIR}/audaspace/AUD_AnimateableProperty.cpp
+	${SRC_DIR}/audaspace/AUD_Buffer.cpp
+	${SRC_DIR}/audaspace/AUD_BufferReader.cpp
+	${SRC_DIR}/audaspace/AUD_C-API.cpp
+	${SRC_DIR}/audaspace/AUD_ChannelMapperFactory.cpp
+	${SRC_DIR}/audaspace/AUD_ChannelMapperReader.cpp
+	${SRC_DIR}/audaspace/AUD_ConverterFactory.cpp
+	${SRC_DIR}/audaspace/AUD_ConverterFunctions.cpp
+	${SRC_DIR}/audaspace/AUD_ConverterReader.cpp
+	${SRC_DIR}/audaspace/AUD_FileFactory.cpp
+	${SRC_DIR}/audaspace/AUD_FileWriter.cpp
+	${SRC_DIR}/audaspace/AUD_JOSResampleFactory.cpp
+	${SRC_DIR}/audaspace/AUD_JOSResampleReader.cpp
+	${SRC_DIR}/audaspace/AUD_LinearResampleFactory.cpp
+	${SRC_DIR}/audaspace/AUD_LinearResampleReader.cpp
+	${SRC_DIR}/audaspace/AUD_Mixer.cpp
+	${SRC_DIR}/audaspace/AUD_MixerFactory.cpp
+	${SRC_DIR}/audaspace/AUD_NULLDevice.cpp
+	${SRC_DIR}/audaspace/AUD_ReadDevice.cpp
+	${SRC_DIR}/audaspace/AUD_ReferenceHandler.cpp
+	${SRC_DIR}/audaspace/AUD_ResampleReader.cpp
+	${SRC_DIR}/audaspace/AUD_SequencerEntry.cpp
+	${SRC_DIR}/audaspace/AUD_SequencerFactory.cpp
+	${SRC_DIR}/audaspace/AUD_SequencerHandle.cpp
+	${SRC_DIR}/audaspace/AUD_SequencerReader.cpp
+	${SRC_DIR}/audaspace/AUD_SilenceFactory.cpp
+	${SRC_DIR}/audaspace/AUD_SilenceReader.cpp
+	${SRC_DIR}/audaspace/AUD_SinusFactory.cpp
+	${SRC_DIR}/audaspace/AUD_SinusReader.cpp
+	${SRC_DIR}/audaspace/AUD_SoftwareDevice.cpp
+	${SRC_DIR}/audaspace/AUD_StreamBufferFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_AccumulatorFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_BaseIIRFilterReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_ButterworthFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_CallbackIIRFilterReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DelayFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DelayReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DoubleFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DoubleReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DynamicIIRFilterFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_DynamicIIRFilterReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_EffectFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_EffectReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_EnvelopeFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_FaderFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_FaderReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_HighpassFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_IIRFilterFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_IIRFilterReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_LimiterFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_LimiterReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_LoopFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_LoopReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_LowpassFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_PingPongFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_PitchFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_PitchReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_RectifyFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_ReverseFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_ReverseReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_SquareFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_SumFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_SuperposeFactory.cpp
+	${SRC_DIR}/audaspace/FX/AUD_SuperposeReader.cpp
+	${SRC_DIR}/audaspace/FX/AUD_VolumeFactory.cpp
+	${SRC_DIR}/audaspace/OpenAL/AUD_OpenALDevice.cpp
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileFactory.cpp
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileReader.cpp
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileWriter.cpp
+)
+
+# audaspace header
+list(APPEND HDR
+	${SRC_DIR}/audaspace/AUD_3DMath.h
+	${SRC_DIR}/audaspace/AUD_AnimateableProperty.h
+	${SRC_DIR}/audaspace/AUD_Buffer.h
+	${SRC_DIR}/audaspace/AUD_BufferReader.h
+	${SRC_DIR}/audaspace/AUD_C-API.h
+	${SRC_DIR}/audaspace/AUD_ChannelMapperFactory.h
+	${SRC_DIR}/audaspace/AUD_ChannelMapperReader.h
+	${SRC_DIR}/audaspace/AUD_ConverterFactory.h
+	${SRC_DIR}/audaspace/AUD_ConverterFunctions.h
+	${SRC_DIR}/audaspace/AUD_ConverterReader.h
+	${SRC_DIR}/audaspace/AUD_FileFactory.h
+	${SRC_DIR}/audaspace/AUD_FileWriter.h
+	${SRC_DIR}/audaspace/AUD_I3DDevice.h
+	${SRC_DIR}/audaspace/AUD_I3DHandle.h
+	${SRC_DIR}/audaspace/AUD_IDevice.h
+	${SRC_DIR}/audaspace/AUD_IFactory.h
+	${SRC_DIR}/audaspace/AUD_IHandle.h
+	${SRC_DIR}/audaspace/AUD_ILockable.h
+	${SRC_DIR}/audaspace/AUD_IReader.h
+	${SRC_DIR}/audaspace/AUD_IWriter.h
+	${SRC_DIR}/audaspace/AUD_JOSResampleFactory.h
+	${SRC_DIR}/audaspace/AUD_JOSResampleReader.h
+	${SRC_DIR}/audaspace/AUD_LinearResampleFactory.h
+	${SRC_DIR}/audaspace/AUD_LinearResampleReader.h
+	${SRC_DIR}/audaspace/AUD_MixerFactory.h
+	${SRC_DIR}/audaspace/AUD_Mixer.h
+	${SRC_DIR}/audaspace/AUD_MutexLock.h
+	${SRC_DIR}/audaspace/AUD_NULLDevice.h
+	${SRC_DIR}/audaspace/AUD_PyInit.h
+	${SRC_DIR}/audaspace/AUD_ReadDevice.h
+	${SRC_DIR}/audaspace/AUD_Reference.h
+	${SRC_DIR}/audaspace/AUD_ResampleFactory.h
+	${SRC_DIR}/audaspace/AUD_ResampleReader.h
+	${SRC_DIR}/audaspace/AUD_SequencerEntry.h
+	${SRC_DIR}/audaspace/AUD_SequencerFactory.h
+	${SRC_DIR}/audaspace/AUD_SequencerHandle.h
+	${SRC_DIR}/audaspace/AUD_SequencerReader.h
+	${SRC_DIR}/audaspace/AUD_SilenceFactory.h
+	${SRC_DIR}/audaspace/AUD_SilenceReader.h
+	${SRC_DIR}/audaspace/AUD_SinusFactory.h
+	${SRC_DIR}/audaspace/AUD_SinusReader.h
+	${SRC_DIR}/audaspace/AUD_SoftwareDevice.h
+	${SRC_DIR}/audaspace/AUD_Space.h
+	${SRC_DIR}/audaspace/AUD_StreamBufferFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_AccumulatorFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_BaseIIRFilterReader.h
+	${SRC_DIR}/audaspace/FX/AUD_ButterworthFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_CallbackIIRFilterReader.h
+	${SRC_DIR}/audaspace/FX/AUD_DelayFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_DelayReader.h
+	${SRC_DIR}/audaspace/FX/AUD_DoubleFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_DoubleReader.h
+	${SRC_DIR}/audaspace/FX/AUD_DynamicIIRFilterFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_DynamicIIRFilterReader.h
+	${SRC_DIR}/audaspace/FX/AUD_EffectFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_EffectReader.h
+	${SRC_DIR}/audaspace/FX/AUD_EnvelopeFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_FaderFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_FaderReader.h
+	${SRC_DIR}/audaspace/FX/AUD_HighpassFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_IIRFilterFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_IIRFilterReader.h
+	${SRC_DIR}/audaspace/FX/AUD_LimiterFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_LimiterReader.h
+	${SRC_DIR}/audaspace/FX/AUD_LoopFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_LoopReader.h
+	${SRC_DIR}/audaspace/FX/AUD_LowpassFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_PingPongFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_PitchFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_PitchReader.h
+	${SRC_DIR}/audaspace/FX/AUD_RectifyFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_ReverseFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_ReverseReader.h
+	${SRC_DIR}/audaspace/FX/AUD_SquareFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_SumFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_SuperposeFactory.h
+	${SRC_DIR}/audaspace/FX/AUD_SuperposeReader.h
+	${SRC_DIR}/audaspace/FX/AUD_VolumeFactory.h
+	${SRC_DIR}/audaspace/OpenAL/AUD_OpenALDevice.h
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileFactory.h
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileReader.h
+	${SRC_DIR}/audaspace/sndfile/AUD_SndFileWriter.h
 )
 
 add_executable(${EXE} WIN32 ${SRC} ${HDR})
