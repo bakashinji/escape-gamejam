@@ -27,7 +27,7 @@ private:
 	//std::unique_ptr<Fighter> m_player;
 
 public:
-	MainState(Escape& woc);
+	MainState(TheEscape& woc);
 	virtual ~MainState();
 
 	Ogre::SceneManager* getSceneManager();

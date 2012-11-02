@@ -6,7 +6,7 @@
 #include "QuitAction.h"
 #include "MoveActions.h"
 
-MainState::MainState(Escape& woc) :
+MainState::MainState(TheEscape& woc) :
 	GameState(woc),
 	m_renderer(woc.getRenderSystem()),
 	m_input(woc.getInputSystem())

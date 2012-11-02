@@ -4,7 +4,7 @@
 
 int main()
 {
-	Escape c;
+	TheEscape c;
 
 	c.play();
 

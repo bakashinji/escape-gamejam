@@ -8,7 +8,7 @@
 #include "RenderSystem.h"
 #include "InputSystem.h"
 
-class Escape : public GameApplication
+class TheEscape : public GameApplication
 {
 private:
 	Ogre::LogManager m_logger;
@@ -17,8 +17,8 @@ private:
 	InputSystem* m_input;
 
 public:
-	Escape();
-	~Escape();
+	TheEscape();
+	~TheEscape();
 
 	RenderSystem& getRenderSystem();
 	InputSystem& getInputSystem();

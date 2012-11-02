@@ -6,29 +6,29 @@
 #include "MessageException.h"
 #include "MainState.h"
 
-Escape::Escape() :
+TheEscape::TheEscape() :
 	m_input(NULL),
 	m_renderer(NULL)
 {
 }
 
-Escape::~Escape()
+TheEscape::~TheEscape()
 {
 	delete m_renderer;
 	delete m_input;
 }
 
-RenderSystem & Escape::getRenderSystem()
+RenderSystem & TheEscape::getRenderSystem()
 {
 	return *m_renderer;
 }
 
-InputSystem & Escape::getInputSystem()
+InputSystem & TheEscape::getInputSystem()
 {
 	return *m_input;
 }
 
-void Escape::init()
+void TheEscape::init()
 {
 	m_logger.createLog("default.log", true, false, true);
 
@@ -75,7 +75,7 @@ void Escape::init()
 	pushGameState("main");
 }
 
-void Escape::exit()
+void TheEscape::exit()
 {
 	delete m_renderer;
 	delete m_input;
@@ -86,7 +86,7 @@ void Escape::exit()
 	SDL_Quit();
 }
 
-void Escape::update(float time)
+void TheEscape::update(float time)
 {
 	SDL_Event event;
 
