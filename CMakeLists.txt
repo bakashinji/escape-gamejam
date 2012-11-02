@@ -128,7 +128,10 @@ set(LIBS
 )
 
 if(WIN32)
+	add_definitions(-DWIN32)
+
 	set(LIBDIR windows)
+
 	set(PTHREADS_INCLUDE_DIRS ${LIBDIR}/pthreads/include)
 	set(PTHREADS_LIBRARIES ${LIBDIR}/pthreads/lib/pthreadVC2.lib)
 
@@ -173,7 +176,6 @@ set(SRC
 	${SRC_DIR}/GameObject.cpp
 )
 set(HDR
-	${SRC_DIR}/unique_ptr.h
 	${SRC_DIR}/GameApplication.h
 	${SRC_DIR}/Escape.h
 	${SRC_DIR}/GameState.h

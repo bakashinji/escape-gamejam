@@ -6,18 +6,26 @@
 #include "MessageException.h"
 #include "MainState.h"
 
-Escape::Escape()
+Escape::Escape() :
+	m_input(NULL),
+	m_renderer(NULL)
 {
+}
+
+Escape::~Escape()
+{
+	delete m_renderer;
+	delete m_input;
 }
 
 RenderSystem & Escape::getRenderSystem()
 {
-	return *m_renderer.get();
+	return *m_renderer;
 }
 
 InputSystem & Escape::getInputSystem()
 {
-	return *m_input.get();
+	return *m_input;
 }
 
 void Escape::init()
@@ -26,7 +34,8 @@ void Escape::init()
 
 	try
 	{
-		m_config.reset(new LuaConfiguration("config.lua"));
+		delete m_config;
+		m_config = new LuaConfiguration("config.lua");
 	}
 	catch(MessageException& e)
 	{
@@ -36,8 +45,10 @@ void Escape::init()
 	if(SDL_Init(SDL_INIT_NOPARACHUTE))
 		Ogre::LogManager::getSingleton().logMessage(Ogre::LML_CRITICAL, "Error initializing SDL: " + std::string(SDL_GetError()));
 
-	m_renderer.reset(new RenderSystem(*this));
-	SDL_WM_SetCaption("Escape", NULL);
+
+	delete m_renderer;
+	m_renderer = new RenderSystem(*this);
+  SDL_WM_SetCaption("Escape", NULL);
 
 	/* ResourceGroupManager */
 	Ogre::ResourceGroupManager &resGroupMgr = Ogre::ResourceGroupManager::getSingleton();
@@ -57,7 +68,8 @@ void Escape::init()
 	font->load();
 
 
-	m_input.reset(new InputSystem(*this));
+	delete m_input;
+	m_input = new InputSystem(*this);
 
 	m_game_states["main"] = new MainState(*this);
 	pushGameState("main");
@@ -65,8 +77,12 @@ void Escape::init()
 
 void Escape::exit()
 {
-	m_renderer.reset();
-	m_input.reset();
+	delete m_renderer;
+	delete m_input;
+
+	m_renderer = NULL;
+	m_input = NULL;
+
 	SDL_Quit();
 }
 

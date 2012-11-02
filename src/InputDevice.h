@@ -1,18 +1,18 @@
 #ifndef INPUTDEVICE_H
 #define INPUTDEVICE_H
 
-#include <boost/unordered_map.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
 #include <memory>
+#include <map>
 
 #include "IInputAction.h"
 
 class InputDevice
 {
 protected:
-	boost::unordered_map<int, boost::shared_ptr<IInputAction> > m_bindings;
-	boost::unordered_map<int, boost::shared_ptr<IInputAction> > m_continuous;
+	std::map<int, boost::shared_ptr<IInputAction> > m_bindings;
+	std::map<int, boost::shared_ptr<IInputAction> > m_continuous;
 
 	static const int NOT_FOUND = 0x80000000;
 
