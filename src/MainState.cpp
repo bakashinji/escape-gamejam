@@ -51,6 +51,17 @@ void MainState::load()
 	m_sceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(planeentity);*/
 	/*planeentity->setMaterialName("Examples/Rockwall");
 	planeentity->setCastShadows(false);*/
+	Ogre::Entity* test_cube = m_sceneManager->createEntity("cube", "Cube.mesh");
+  Ogre::SceneNode* node = m_sceneManager->getRootSceneNode()->createChildSceneNode();
+  node->attachObject(test_cube);
+  node->scale(1,1,1);
+
+  Ogre::Light* directionallight = m_sceneManager->createLight("DirectionalLight");
+  directionallight->setType(Ogre::Light::LT_DIRECTIONAL);
+  directionallight->setDirection(Ogre::Vector3(0, -1, 1));
+  directionallight = m_sceneManager->createLight("DirectionalLight2");
+  directionallight->setType(Ogre::Light::LT_DIRECTIONAL);
+  directionallight->setDirection(Ogre::Vector3(0, -1, -1));
 
 #if 0
 

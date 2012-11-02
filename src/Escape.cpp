@@ -41,16 +41,21 @@ void Escape::init()
 
 	/* ResourceGroupManager */
 	Ogre::ResourceGroupManager &resGroupMgr = Ogre::ResourceGroupManager::getSingleton();
-	resGroupMgr.addResourceLocation("./models", "FileSystem");
+	resGroupMgr.addResourceLocation("../graphix", "FileSystem");
+#ifdef WIN32
+#else
 	resGroupMgr.addResourceLocation("/usr/share/fonts/TTF", "FileSystem");
+#endif
 	resGroupMgr.initialiseAllResourceGroups();
 	Ogre::FontManager &fontMgr = Ogre::FontManager::getSingleton();
+	Ogre::MaterialManager& material_mgr = Ogre::MaterialManager::getSingleton();
 	Ogre::ResourcePtr font = fontMgr.create("FreeSans","General");
 	font->setParameter("type","truetype");
 	font->setParameter("source","DejaVuSans.ttf");
 	font->setParameter("size","16");
 	font->setParameter("resolution","96");
 	font->load();
+
 
 	m_input.reset(new InputSystem(*this));
 
