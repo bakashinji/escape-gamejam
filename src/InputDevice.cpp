@@ -29,7 +29,7 @@ InputDevice::~InputDevice()
 {
 }
 
-bool InputDevice::addBinding(std::string name, std::shared_ptr<IInputAction> action)
+bool InputDevice::addBinding(std::string name, boost::shared_ptr<IInputAction> action)
 {
 	int id = translate(name);
 	if(id == NOT_FOUND)
@@ -43,20 +43,20 @@ bool InputDevice::addBinding(std::string name, std::shared_ptr<IInputAction> act
 	return true;
 }
 
-bool InputDevice::removeBinding(std::string name, std::shared_ptr<IInputAction> action)
+bool InputDevice::removeBinding(std::string name, boost::shared_ptr<IInputAction> action)
 {
 	int id = translate(name);
 	if(id == NOT_FOUND)
 		return false;
 
-	auto it = m_bindings.find(id);
+	boost::unordered_map<int, boost::shared_ptr<IInputAction> >::iterator it = m_bindings.find(id);
 	if(it != m_bindings.end())
 	{
 		m_bindings.erase(it);
 		return true;
 	}
 
-	auto it2 = m_continuous.find(id);
+	boost::unordered_map<int, boost::shared_ptr<IInputAction> >::iterator it2 = m_continuous.find(id);
 	if(it2 != m_continuous.end())
 	{
 		m_continuous.erase(it2);
@@ -68,7 +68,7 @@ bool InputDevice::removeBinding(std::string name, std::shared_ptr<IInputAction> 
 
 void InputDevice::fire(int id, float value, float time)
 {
-	auto res = m_bindings.find(id);
+	boost::unordered_map<int, boost::shared_ptr<IInputAction> >::iterator res = m_bindings.find(id);
 
 	if(res != m_bindings.end())
 	{

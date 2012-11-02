@@ -124,21 +124,21 @@ void MainState::load()
 
 #endif
 
-	std::vector<std::shared_ptr<IInputAction>> actions;
-	actions.push_back(std::shared_ptr<IInputAction>(new QuitAction(m_ga)));
-	/*actions.push_back(std::shared_ptr<IInputAction>(new AccelerateAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new DragAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new RollLeftAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new RollRightAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new BoostAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new RiseAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new FallAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new LeftAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new RightAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new SteerAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new ClimbAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new RollAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new ThrustAction(*m_player.get())));*/
+	std::vector<boost::shared_ptr<IInputAction> > actions;
+	actions.push_back(boost::shared_ptr<IInputAction>(new QuitAction(m_ga)));
+	/*actions.push_back(boost::shared_ptr<IInputAction>(new AccelerateAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new DragAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new RollLeftAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new RollRightAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new BoostAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new RiseAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new FallAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new LeftAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new RightAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new SteerAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new ClimbAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new RollAction(*m_player.get())));
+	actions.push_back(boost::shared_ptr<IInputAction>(new ThrustAction(*m_player.get())));*/
 
 	m_input.bind(m_ga.getConfig(), actions);
 }

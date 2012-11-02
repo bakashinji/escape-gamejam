@@ -1,5 +1,7 @@
 #include <SDL_keyboard.h>
 
+#include <boost/foreach.hpp>
+
 #include "SDLKeyboard.h"
 
 SDLKeyboard::SDLKeyboard()
@@ -48,7 +50,8 @@ void SDLKeyboard::process(float time)
 
 	Uint8* state = SDL_GetKeyState(&numkeys);
 
-	for(auto& button : m_continuous)
+	typedef std::pair<const int, boost::shared_ptr<IInputAction> > temp;
+	BOOST_FOREACH(temp& button, m_continuous)
 	{
 		button.second->execute(state[button.first], time);
 	}

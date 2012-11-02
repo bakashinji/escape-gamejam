@@ -14,7 +14,7 @@ public:
 	virtual void getString(std::string name, std::string& value)=0;
 	virtual void getStringList(std::string name, std::vector<std::string>& list)=0;
 	virtual void getIndexList(std::string name, std::vector<std::string>& list)=0;
-	virtual void getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string>>& list)=0;
+	virtual void getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string> >& list)=0;
 };
 
 #endif // ICONFIGURATION_H

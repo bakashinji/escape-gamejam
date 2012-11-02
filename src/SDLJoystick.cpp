@@ -1,11 +1,13 @@
 #include "SDLJoystick.h"
 #include "MessageException.h"
 
+#include <boost/foreach.hpp>
+
 SDLJoystick::SDLJoystick(int id)
 {
 	m_joystick = SDL_JoystickOpen(id);
 	if(!m_joystick)
-		throw MessageException(SDL_GetError(), MessageExceptionType::WARNING);
+		throw MessageException(SDL_GetError(), WARNING);
 }
 
 SDLJoystick::~SDLJoystick()
@@ -70,7 +72,8 @@ int SDLJoystick::translate(std::string name)
 
 void SDLJoystick::process(float time)
 {
-	for(auto& button : m_continuous)
+	typedef std::pair<const int, boost::shared_ptr<IInputAction> > temp;
+	BOOST_FOREACH(temp& button, m_continuous)
 	{
 		if(button.first >= AXIS && button.first < AXIS + 32)
 		{

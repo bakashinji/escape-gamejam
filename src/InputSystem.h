@@ -5,27 +5,31 @@
 #include <map>
 #include <memory>
 #include <SDL.h>
+#include <boost/shared_ptr.hpp>
 
 #include "GameSystem.h"
 #include "SDLMouse.h"
 #include "SDLKeyboard.h"
 #include "SDLJoystick.h"
+#include "unique_ptr.h"
 
 class InputDevice;
 class IConfiguration;
 
+
+
 class InputSystem : public GameSystem
 {
 private:
-	std::unique_ptr<SDLMouse> m_mouse;
-	std::unique_ptr<SDLKeyboard> m_keyboard;
-	std::map<int, std::shared_ptr<SDLJoystick>> m_joysticks;
+	unique_ptr(SDLMouse) m_mouse;
+	unique_ptr(SDLKeyboard) m_keyboard;
+	std::map<int, boost::shared_ptr<SDLJoystick> > m_joysticks;
 
 public:
 	InputSystem(GameApplication& ga);
 	virtual ~InputSystem();
 
-	void bind(IConfiguration& config, std::vector<std::shared_ptr<IInputAction>>& actions);
+	void bind(IConfiguration& config, std::vector<boost::shared_ptr<IInputAction> >& actions);
 	void unBindAll();
 
 	virtual void update(float time);

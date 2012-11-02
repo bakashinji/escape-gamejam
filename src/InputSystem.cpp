@@ -5,6 +5,8 @@
 #include "GameApplication.h"
 #include "MessageException.h"
 
+#include <boost/foreach.hpp>
+
 InputSystem::InputSystem(GameApplication& ga) :
 	GameSystem(ga)
 {
@@ -26,16 +28,16 @@ InputSystem::~InputSystem()
 {
 }
 
-void InputSystem::bind(IConfiguration& config, std::vector<std::shared_ptr<IInputAction>>& actions)
+void InputSystem::bind(IConfiguration& config, std::vector<boost::shared_ptr<IInputAction> >& actions)
 {
 	std::vector<std::string> devices;
-	std::vector<std::pair<std::string, std::string>> bindings;
+	std::vector<std::pair<std::string, std::string> > bindings;
 
 	InputDevice* dev;
 
 	config.getIndexList("input", devices);
 
-	for(auto& device : devices)
+	BOOST_FOREACH(std::string& device, devices)
 	{
 		if(device == "keyboard")
 			dev = m_keyboard.get();
@@ -48,10 +50,10 @@ void InputSystem::bind(IConfiguration& config, std::vector<std::shared_ptr<IInpu
 			{
 				try
 				{
-					auto it = m_joysticks.find(id);
+					std::map<int, boost::shared_ptr<SDLJoystick> >::iterator it = m_joysticks.find(id);
 					if(it == m_joysticks.end())
 					{
-						m_joysticks[id] = std::shared_ptr<SDLJoystick>(new SDLJoystick(id));
+						m_joysticks[id] = boost::shared_ptr<SDLJoystick>(new SDLJoystick(id));
 						it = m_joysticks.find(id);
 					}
 					dev = it->second.get();
@@ -69,9 +71,10 @@ void InputSystem::bind(IConfiguration& config, std::vector<std::shared_ptr<IInpu
 
 		config.getIndexStringList("input." + device, bindings);
 
-		for(auto& binding : bindings)
+		typedef std::pair<std::string,std::string> temp;
+		BOOST_FOREACH(temp& binding, bindings)
 		{
-			for(auto& action : actions)
+			BOOST_FOREACH(boost::shared_ptr<IInputAction>& action, actions)
 			{
 				if(action->getName() == binding.second)
 				{
@@ -92,7 +95,8 @@ void InputSystem::update(float time)
 	m_mouse->process(time);
 	m_keyboard->process(time);
 
-	for(auto& joystick : m_joysticks)
+	typedef std::pair<const int, boost::shared_ptr<SDLJoystick> > temp;
+	BOOST_FOREACH(temp& joystick, m_joysticks)
 	{
 		joystick.second->process(time);
 	}
@@ -117,7 +121,7 @@ void InputSystem::process(SDL_Event& event, float time)
 	case SDL_JOYBUTTONDOWN:
 	case SDL_JOYBUTTONUP:
 		{
-			auto it = m_joysticks.find(event.jaxis.which);
+			std::map<int, boost::shared_ptr<SDLJoystick> >::iterator it = m_joysticks.find(event.jaxis.which);
 			if(it != m_joysticks.end())
 			{
 				it->second->process(event, time);

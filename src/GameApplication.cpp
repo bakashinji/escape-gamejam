@@ -20,7 +20,7 @@ GameApplication::~ GameApplication()
 
 	while(!m_game_states.empty())
 	{
-		auto begin = m_game_states.begin();
+		std::map<std::string, GameState*>::iterator begin = m_game_states.begin();
 		delete begin->second;
 		m_game_states.erase(begin);
 	}
@@ -69,7 +69,7 @@ void GameApplication::switchGameState(std::string name)
 
 void GameApplication::pushGameState(std::string name)
 {
-	auto newState = m_game_states.find(name);
+	std::map<std::string, GameState*>::iterator newState = m_game_states.find(name);
 
 	if(newState != m_game_states.end())
 	{
@@ -82,7 +82,7 @@ void GameApplication::pushGameState(std::string name)
 	}
 	else
 	{
-		throw MessageException("Game state " + name + " not found!", MessageExceptionType::ERROR);
+		throw MessageException("Game state " + name + " not found!", ERROR);
 	}
 }
 

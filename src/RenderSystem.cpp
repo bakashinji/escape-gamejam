@@ -4,6 +4,8 @@
 #include "GameApplication.h"
 #include "MessageException.h"
 
+#include <boost/foreach.hpp>
+
 RenderSystem::RenderSystem(GameApplication &ga) :
 	GameSystem(ga)
 {
@@ -15,7 +17,7 @@ RenderSystem::RenderSystem(GameApplication &ga) :
 	std::string plugindir;
 	std::vector<std::string> plugins;
 
-	auto& config = ga.getConfig();
+	IConfiguration& config = ga.getConfig();
 
 	config.getInteger("width", width);
 	config.getInteger("height", height);
@@ -27,21 +29,21 @@ RenderSystem::RenderSystem(GameApplication &ga) :
 	// SDL Setup
 
 	if(SDL_InitSubSystem(SDL_INIT_VIDEO))
-		throw MessageException("Error initializing SDL: " + std::string(SDL_GetError()), MessageExceptionType::ERROR);
+		throw MessageException("Error initializing SDL: " + std::string(SDL_GetError()), ERROR);
 
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 	if(!(m_screen = SDL_SetVideoMode(width, height, bbp, SDL_OPENGL | SDL_DOUBLEBUF | (windowed ? 0 : SDL_FULLSCREEN))))
 	{
 		SDL_Quit();
-		throw MessageException("Error setting videomode: " + std::string(SDL_GetError()), MessageExceptionType::ERROR);
+		throw MessageException("Error setting videomode: " + std::string(SDL_GetError()), ERROR);
 	}
 
 	// OGRE Setup
 
 	m_root = new Ogre::Root("", "", "");
 
-	for(std::string& plugin : plugins)
+	BOOST_FOREACH(std::string& plugin, plugins)
 		m_root->loadPlugin(plugindir + "/" + plugin);
 
 	m_root->setRenderSystem(m_root->getAvailableRenderers().front());

@@ -3,7 +3,7 @@
 
 #include <string>
 
-enum class MessageExceptionType
+enum MessageExceptionType
 {
 	INFO,
 	WARNING,

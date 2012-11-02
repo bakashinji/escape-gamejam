@@ -207,7 +207,7 @@ find_package(OpenAL REQUIRED)
 find_package(SndFile REQUIRED)
 find_package(Lua51 REQUIRED)
 
-set(CMAKE_CXX_FLAGS "-std=c++0x")
+# set(CMAKE_CXX_FLAGS "-std=c++0x")
 
 list(APPEND INC_DIRS
 	${OpenGL_INCLUDE_DIR}
@@ -245,6 +245,7 @@ set(SRC
 	${SRC_DIR}/GameObject.cpp
 )
 set(HDR
+	${SRC_DIR}/unique_ptr.h
 	${SRC_DIR}/GameApplication.h
 	${SRC_DIR}/Escape.h
 	${SRC_DIR}/GameState.h

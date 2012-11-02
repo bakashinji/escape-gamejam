@@ -22,7 +22,7 @@ public:
 	virtual void getString(std::string name, std::string& value);
 	virtual void getStringList(std::string name, std::vector<std::string>& list);
 	virtual void getIndexList(std::string name, std::vector<std::string>& list);
-	virtual void getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string>>& list);
+	virtual void getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string> >& list);
 };
 
 #endif // LUACONFIGURATION_H

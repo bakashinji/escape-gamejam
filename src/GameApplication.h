@@ -5,6 +5,7 @@
 #include <map>
 #include <stack>
 #include <string>
+#include "unique_ptr.h"
 
 #include "IConfiguration.h"
 
@@ -15,7 +16,7 @@ class GameApplication
 	protected:
 		std::map<std::string, GameState*> m_game_states;
 		std::stack<GameState*> m_states_stack;
-		std::unique_ptr<IConfiguration> m_config;
+		unique_ptr(IConfiguration) m_config;
 
 	public:
 		virtual ~GameApplication();

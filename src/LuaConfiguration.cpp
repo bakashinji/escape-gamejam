@@ -140,7 +140,7 @@ void LuaConfiguration::getIndexList(std::string name, std::vector<std::string>& 
 	lua_pop(m_lua, 1);
 }
 
-void LuaConfiguration::getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string>>& list)
+void LuaConfiguration::getIndexStringList(std::string name, std::vector<std::pair<std::string, std::string> >& list)
 {
 	luaL_dostring(m_lua, std::string("return " + name).c_str());
 	int top = lua_gettop(m_lua);

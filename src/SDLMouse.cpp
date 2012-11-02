@@ -1,5 +1,7 @@
 #include <SDL_mouse.h>
 
+#include <boost/foreach.hpp>
+
 #include "SDLMouse.h"
 
 SDLMouse::SDLMouse(int width, int height) :
@@ -56,7 +58,8 @@ void SDLMouse::process(float time)
 	x -= m_width >> 1;
 	y -= m_height >> 1;
 
-	for(auto& button : m_continuous)
+	typedef std::pair<const int, boost::shared_ptr<IInputAction> > temp;
+	BOOST_FOREACH(temp& button, m_continuous)
 	{
 		if(button.first >= BUTTON1 && button.first <= BUTTON8)
 		{

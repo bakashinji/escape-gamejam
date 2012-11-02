@@ -1,7 +1,8 @@
 #ifndef INPUTDEVICE_H
 #define INPUTDEVICE_H
 
-#include <unordered_map>
+#include <boost/unordered_map.hpp>
+#include <boost/shared_ptr.hpp>
 #include <string>
 #include <memory>
 
@@ -10,8 +11,8 @@
 class InputDevice
 {
 protected:
-	std::unordered_map<int, std::shared_ptr<IInputAction>> m_bindings;
-	std::unordered_map<int, std::shared_ptr<IInputAction>> m_continuous;
+	boost::unordered_map<int, boost::shared_ptr<IInputAction> > m_bindings;
+	boost::unordered_map<int, boost::shared_ptr<IInputAction> > m_continuous;
 
 	static const int NOT_FOUND = 0x80000000;
 
@@ -22,8 +23,8 @@ public:
 	InputDevice();
 	virtual ~InputDevice();
 
-	bool addBinding(std::string name, std::shared_ptr<IInputAction> action);
-	bool removeBinding(std::string name, std::shared_ptr<IInputAction> action);
+	bool addBinding(std::string name, boost::shared_ptr<IInputAction> action);
+	bool removeBinding(std::string name, boost::shared_ptr<IInputAction> action);
 	void fire(int id, float value, float time);
 
 	virtual int translate(std::string name)=0;

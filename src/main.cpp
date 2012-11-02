@@ -1,21 +1,3 @@
-//#include <boost/asio.hpp>
-
-/*
-C++11 cheatsheet
-
-- extern template
-- initializer lists with {}
-- type inference: auto, decltype()
-- foreach: for(int& x : my_array)
-- [object construction]
-- explicit override + final
-- nullptr
-- enum class bla : int {};
-- UTF strings: u8"öä"
-- [regex]
-- smart pointers
-*/
-
 #include "LuaConfiguration.h"
 #include "MessageException.h"
 #include "Escape.h"
