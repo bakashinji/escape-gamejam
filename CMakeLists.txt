@@ -271,7 +271,6 @@ list(APPEND SRC
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.cpp
 	${SRC_DIR}/audaspace/AUD_Buffer.cpp
 	${SRC_DIR}/audaspace/AUD_BufferReader.cpp
-	${SRC_DIR}/audaspace/AUD_C-API.cpp
 	${SRC_DIR}/audaspace/AUD_ChannelMapperFactory.cpp
 	${SRC_DIR}/audaspace/AUD_ChannelMapperReader.cpp
 	${SRC_DIR}/audaspace/AUD_ConverterFactory.cpp
@@ -345,7 +344,6 @@ list(APPEND HDR
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.h
 	${SRC_DIR}/audaspace/AUD_Buffer.h
 	${SRC_DIR}/audaspace/AUD_BufferReader.h
-	${SRC_DIR}/audaspace/AUD_C-API.h
 	${SRC_DIR}/audaspace/AUD_ChannelMapperFactory.h
 	${SRC_DIR}/audaspace/AUD_ChannelMapperReader.h
 	${SRC_DIR}/audaspace/AUD_ConverterFactory.h
@@ -369,7 +367,6 @@ list(APPEND HDR
 	${SRC_DIR}/audaspace/AUD_Mixer.h
 	${SRC_DIR}/audaspace/AUD_MutexLock.h
 	${SRC_DIR}/audaspace/AUD_NULLDevice.h
-	${SRC_DIR}/audaspace/AUD_PyInit.h
 	${SRC_DIR}/audaspace/AUD_ReadDevice.h
 	${SRC_DIR}/audaspace/AUD_Reference.h
 	${SRC_DIR}/audaspace/AUD_ResampleFactory.h
