@@ -128,7 +128,10 @@ set(LIBS
 )
 
 if(WIN32)
+	add_definitions(-DWIN32)
+
 	set(LIBDIR windows)
+
 	set(PTHREADS_INCLUDE_DIRS ${LIBDIR}/pthreads/include)
 	set(PTHREADS_LIBRARIES ${LIBDIR}/pthreads/lib/pthreadVC2.lib)
 
