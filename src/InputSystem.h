@@ -11,7 +11,6 @@
 #include "SDLMouse.h"
 #include "SDLKeyboard.h"
 #include "SDLJoystick.h"
-#include "unique_ptr.h"
 
 class InputDevice;
 class IConfiguration;

@@ -5,7 +5,6 @@
 #include <map>
 #include <stack>
 #include <string>
-#include "unique_ptr.h"
 
 #include "IConfiguration.h"
 
