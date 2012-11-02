@@ -18,11 +18,11 @@ C++11 cheatsheet
 
 #include "LuaConfiguration.h"
 #include "MessageException.h"
-#include "WingsOfConcept.h"
+#include "Escape.h"
 
 int main()
 {
-	WingsOfConcept c;
+	Escape c;
 
 	c.play();
 

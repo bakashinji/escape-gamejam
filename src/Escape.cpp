@@ -1,26 +1,26 @@
 #include <Ogre.h>
 #include <OgreFontManager.h>
 
-#include "WingsOfConcept.h"
+#include "Escape.h"
 #include "LuaConfiguration.h"
 #include "MessageException.h"
 #include "MainState.h"
 
-WingsOfConcept::WingsOfConcept()
+Escape::Escape()
 {
 }
 
-RenderSystem & WingsOfConcept::getRenderSystem()
+RenderSystem & Escape::getRenderSystem()
 {
 	return *m_renderer.get();
 }
 
-InputSystem & WingsOfConcept::getInputSystem()
+InputSystem & Escape::getInputSystem()
 {
 	return *m_input.get();
 }
 
-void WingsOfConcept::init()
+void Escape::init()
 {
 	m_logger.createLog("default.log", true, false, true);
 
@@ -47,7 +47,7 @@ void WingsOfConcept::init()
 	Ogre::FontManager &fontMgr = Ogre::FontManager::getSingleton();
 	Ogre::ResourcePtr font = fontMgr.create("FreeSans","General");
 	font->setParameter("type","truetype");
-  font->setParameter("source","DejaVuSans.ttf");
+	font->setParameter("source","DejaVuSans.ttf");
 	font->setParameter("size","16");
 	font->setParameter("resolution","96");
 	font->load();
@@ -58,14 +58,14 @@ void WingsOfConcept::init()
 	pushGameState("main");
 }
 
-void WingsOfConcept::exit()
+void Escape::exit()
 {
 	m_renderer.reset();
 	m_input.reset();
 	SDL_Quit();
 }
 
-void WingsOfConcept::update(float time)
+void Escape::update(float time)
 {
 	SDL_Event event;
 

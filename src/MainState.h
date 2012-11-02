@@ -2,11 +2,11 @@
 #define MAINSTATE_H
 
 #include "GameState.h"
-#include "WingsOfConcept.h"
+#include "Escape.h"
 
 class RenderSystem;
 class InputSystem;
-class Fighter;
+//class Fighter;
 
 namespace Ogre
 {
@@ -24,10 +24,10 @@ private:
 	Ogre::TextAreaOverlayElement* m_speed;
 	Ogre::TextAreaOverlayElement* m_fuell;
 
-	std::unique_ptr<Fighter> m_player;
+	//std::unique_ptr<Fighter> m_player;
 
 public:
-	MainState(WingsOfConcept& woc);
+	MainState(Escape& woc);
 	virtual ~MainState();
 
 	Ogre::SceneManager* getSceneManager();

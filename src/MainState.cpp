@@ -5,9 +5,8 @@
 #include "MainState.h"
 #include "QuitAction.h"
 #include "MoveActions.h"
-#include "Fighter.h"
 
-MainState::MainState(WingsOfConcept& woc) :
+MainState::MainState(Escape& woc) :
 	GameState(woc),
 	m_renderer(woc.getRenderSystem()),
 	m_input(woc.getInputSystem())
@@ -52,6 +51,8 @@ void MainState::load()
 	m_sceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(planeentity);*/
 	/*planeentity->setMaterialName("Examples/Rockwall");
 	planeentity->setCastShadows(false);*/
+
+#if 0
 
 	/* Terrain */
 	Ogre::Entity* terrain = m_sceneManager->createEntity("Terrain", "Grid.mesh");
@@ -121,10 +122,11 @@ void MainState::load()
 
 	overlay->show();
 
+#endif
 
 	std::vector<std::shared_ptr<IInputAction>> actions;
 	actions.push_back(std::shared_ptr<IInputAction>(new QuitAction(m_ga)));
-	actions.push_back(std::shared_ptr<IInputAction>(new AccelerateAction(*m_player.get())));
+	/*actions.push_back(std::shared_ptr<IInputAction>(new AccelerateAction(*m_player.get())));
 	actions.push_back(std::shared_ptr<IInputAction>(new DragAction(*m_player.get())));
 	actions.push_back(std::shared_ptr<IInputAction>(new RollLeftAction(*m_player.get())));
 	actions.push_back(std::shared_ptr<IInputAction>(new RollRightAction(*m_player.get())));
@@ -136,13 +138,14 @@ void MainState::load()
 	actions.push_back(std::shared_ptr<IInputAction>(new SteerAction(*m_player.get())));
 	actions.push_back(std::shared_ptr<IInputAction>(new ClimbAction(*m_player.get())));
 	actions.push_back(std::shared_ptr<IInputAction>(new RollAction(*m_player.get())));
-	actions.push_back(std::shared_ptr<IInputAction>(new ThrustAction(*m_player.get())));
+	actions.push_back(std::shared_ptr<IInputAction>(new ThrustAction(*m_player.get())));*/
 
 	m_input.bind(m_ga.getConfig(), actions);
 }
 
 void MainState::update(float time)
 {
+#if 0
 	m_player->update(time);
 
 	std::stringstream sstr;
@@ -153,6 +156,7 @@ void MainState::update(float time)
 	sstr.str("");
 	sstr << "Boost: " << int(m_player->getFuell() / Fighter::MAX_FUELL * 100) << " %";
 	m_fuell->setCaption(sstr.str());
+#endif
 }
 
 void MainState::stop()

@@ -228,7 +228,7 @@ set(EXE escape)
 set(SRC
 	${SRC_DIR}/main.cpp
 	${SRC_DIR}/GameApplication.cpp
-	${SRC_DIR}/WingsOfConcept.cpp
+	${SRC_DIR}/Escape.cpp
 	${SRC_DIR}/GameState.cpp
 	${SRC_DIR}/MainState.cpp
 	${SRC_DIR}/GameSystem.cpp
@@ -242,13 +242,11 @@ set(SRC
 	${SRC_DIR}/SDLJoystick.cpp
 	${SRC_DIR}/QuitAction.cpp
 	${SRC_DIR}/MoveActions.cpp
-	${SRC_DIR}/CombatActions.cpp
 	${SRC_DIR}/GameObject.cpp
-	${SRC_DIR}/Fighter.cpp
 )
 set(HDR
 	${SRC_DIR}/GameApplication.h
-	${SRC_DIR}/WingsOfConcept.h
+	${SRC_DIR}/Escape.h
 	${SRC_DIR}/GameState.h
 	${SRC_DIR}/MainState.h
 	${SRC_DIR}/GameSystem.h
@@ -264,9 +262,7 @@ set(HDR
 	${SRC_DIR}/SDLJoystick.h
 	${SRC_DIR}/QuitAction.h
 	${SRC_DIR}/MoveActions.h
-	${SRC_DIR}/CombatActions.h
 	${SRC_DIR}/GameObject.h
-	${SRC_DIR}/Fighter.h
 )
 
 # audaspace source

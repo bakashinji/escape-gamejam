@@ -1,5 +1,6 @@
 #include "MoveActions.h"
 
+#if 0
 /***************** AccelerateAction ********************/
 
 AccelerateAction::AccelerateAction(Fighter& fighter) :
@@ -338,3 +339,4 @@ std::string ThrustAction::getName() const
 	return "thrust";
 }
 
+#endif

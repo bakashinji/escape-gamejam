@@ -2,9 +2,8 @@
 #define MOVEACTIONS_H
 
 #include "IInputAction.h"
-#include "Fighter.h"
 
-class AccelerateAction : public IInputAction
+/*class AccelerateAction : public IInputAction
 {
 private:
 	Fighter& m_fighter;
@@ -171,6 +170,6 @@ public:
 	virtual void execute(float value, float time);
 	virtual bool isContinuous();
 	virtual std::string getName() const;
-};
+};*/
 
 #endif // MOVEACTIONS_H

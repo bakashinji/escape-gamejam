@@ -8,7 +8,7 @@
 #include "RenderSystem.h"
 #include "InputSystem.h"
 
-class WingsOfConcept : public GameApplication
+class Escape : public GameApplication
 {
 private:
 	Ogre::LogManager m_logger;
@@ -17,7 +17,7 @@ private:
 	std::unique_ptr<InputSystem> m_input;
 
 public:
-	WingsOfConcept();
+	Escape();
 
 	RenderSystem& getRenderSystem();
 	InputSystem& getInputSystem();
