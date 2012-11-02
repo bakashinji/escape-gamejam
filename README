@@ -1,10 +1,19 @@
-Create a folder ../build
+folderstructure:
+
+checkout svn: https://svn.icg.tugraz.at/gamejam/escape/
+
+cd escape
+git clone git@github.com:bakashinji/escape-gamejam.git dev_files
+
+
+mkdir build
 cd ../build
-ccmake ../$ESCAPE_ROOT_FOLDER
+ccmake ../dev_files
 press c
 ignore that boost lib dir couldn't be found, doesn't matter ^^
-cd CMakeFiles/poc.dir/
-open link.txt with an editor of your choise and add -lboost_system
+press g
+
+execute the binary from the dev_files folder with: ../build/dist/bin/escape
 
 to install ogrebullet with archlinux do the following:
 copy the PKGBUILD file as well as the bugfix.diff in a seperate folder
