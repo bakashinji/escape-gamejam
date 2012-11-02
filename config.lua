@@ -5,8 +5,8 @@ if debug then
 	height = 768
 	windowed = true
 else
-	width = 1680
-	height = 1050
+	width = 1600
+	height = 900
 	windowed = false
 end
 bpp = 32
