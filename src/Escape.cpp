@@ -37,7 +37,7 @@ void Escape::init()
 		Ogre::LogManager::getSingleton().logMessage(Ogre::LML_CRITICAL, "Error initializing SDL: " + std::string(SDL_GetError()));
 
 	m_renderer.reset(new RenderSystem(*this));
-	SDL_WM_SetCaption("Wings of Concept", NULL);
+	SDL_WM_SetCaption("Escape", NULL);
 
 	/* ResourceGroupManager */
 	Ogre::ResourceGroupManager &resGroupMgr = Ogre::ResourceGroupManager::getSingleton();
