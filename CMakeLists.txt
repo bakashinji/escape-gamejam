@@ -19,7 +19,7 @@ if(WIN32)
 		$ENV{OGRE_HOME}/Samples/include
 	)
 endif(WIN32)
- 
+
 if(UNIX)
 	if(EXISTS "/usr/local/lib/OGRE/cmake")
 
@@ -117,6 +117,25 @@ find_package(OpenAL REQUIRED)
 find_package(SndFile REQUIRED)
 find_package(Lua51 REQUIRED)
 
+set(LIBS
+	${OpenGL_gl_LIBRARY}
+	${OGRE_LIBRARIES}
+	${SDL_LIBRARY}
+	${OPENAL_LIBRARY}
+	${SndFile_LIBRARIES}
+	${Boost_LIBRARIES}
+	${LUA_LIBRARIES}
+)
+
+if(WIN32)
+	set(LIBDIR windows)
+	set(PTHREADS_INCLUDE_DIRS ${LIBDIR}/pthreads/include)
+	set(PTHREADS_LIBRARIES ${LIBDIR}/pthreads/lib/pthreadVC2.lib)
+
+	list(APPEND INC_DIRS ${PTHREADS_INCLUDE_DIRS})
+	list(APPEND LIBS ${PTHREADS_LIBRARIES})
+endif(WIN32)
+ 
 # set(CMAKE_CXX_FLAGS "-std=c++0x")
 
 list(APPEND INC_DIRS
@@ -334,13 +353,7 @@ list(APPEND HDR
 add_executable(${EXE} WIN32 ${SRC} ${HDR})
 
 target_link_libraries(${EXE}
-	${OpenGL_gl_LIBRARY}
-	${OGRE_LIBRARIES}
-	${SDL_LIBRARY}
-	${OPENAL_LIBRARY}
-	${SndFile_LIBRARIES}
-	${Boost_LIBRARIES}
-	${LUA_LIBRARIES}
+	${LIBS}
 )
 
 set_target_properties(${EXE} PROPERTIES DEBUG_POSTFIX _d)
