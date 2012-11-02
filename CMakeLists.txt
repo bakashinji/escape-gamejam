@@ -198,7 +198,8 @@ set(HDR
 )
 
 # audaspace source
-list(APPEND SRC
+#list(APPEND SRC
+set(USELESS_SRC
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.cpp
 	${SRC_DIR}/audaspace/AUD_Buffer.cpp
 	${SRC_DIR}/audaspace/AUD_BufferReader.cpp
@@ -270,7 +271,8 @@ list(APPEND SRC
 )
 
 # audaspace header
-list(APPEND HDR
+#list(APPEND HDR
+set(USELESS_HDR
 	${SRC_DIR}/audaspace/AUD_3DMath.h
 	${SRC_DIR}/audaspace/AUD_AnimateableProperty.h
 	${SRC_DIR}/audaspace/AUD_Buffer.h
